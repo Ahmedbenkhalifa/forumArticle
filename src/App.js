@@ -1,24 +1,24 @@
-import logo from './logo.svg';
-import './App.css';
-
+import { CssBaseline, ThemeProvider } from "@mui/material";
+import { BrowserRouter } from "react-router-dom";
+import theme from "./assets/theme";
+import "./App.css";
+import { Routes } from "./Routes";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { getAuthUser } from "./actions/authActions";
 function App() {
+  const { isLoadingInitial } = useSelector((state) => state.userReducer);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getAuthUser());
+  }, [dispatch]);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        {!isLoadingInitial && <Routes />}
+      </ThemeProvider>
+    </BrowserRouter>
   );
 }
 

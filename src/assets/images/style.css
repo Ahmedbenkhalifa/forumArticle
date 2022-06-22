@@ -1,0 +1,164 @@
+/* check Animation */
+@-webkit-keyframes scaleAnimation {
+  0% {
+    opacity: 0;
+    transform: scale(1.5);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes scaleAnimation {
+  0% {
+    opacity: 0;
+    transform: scale(1.5);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+@-webkit-keyframes drawCircle {
+  0% {
+    stroke-dashoffset: 151px;
+  }
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+@keyframes drawCircle {
+  0% {
+    stroke-dashoffset: 151px;
+  }
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+@-webkit-keyframes drawCheck {
+  0% {
+    stroke-dashoffset: 36px;
+  }
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+@keyframes drawCheck {
+  0% {
+    stroke-dashoffset: 36px;
+  }
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+@-webkit-keyframes fadeOut {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+@-webkit-keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+#successAnimationCircle {
+  stroke-dasharray: 151px 151px;
+  stroke: rgb(30, 30, 30);
+}
+
+#successAnimationCheck {
+  stroke-dasharray: 36px 36px;
+  stroke: rgb(30, 30, 30);
+}
+
+#successAnimationResult {
+  fill: rgb(30, 30, 30);
+  opacity: 0;
+}
+
+#successAnimation.animated {
+  -webkit-animation: 1s ease-out 1.2s 1 both scaleAnimation;
+  animation: 1s ease-out 1.2s 1 both scaleAnimation;
+}
+#successAnimation.animated #successAnimationCircle {
+  -webkit-animation: 1s cubic-bezier(0.77, 0, 0.175, 1) 1.2s 1 both drawCircle,
+    0.3s linear 2.1s 1 both fadeOut;
+  animation: 1s cubic-bezier(0.77, 0, 0.175, 1) 1.2s 1 both drawCircle,
+    0.3s linear 2.1s 1 both fadeOut;
+}
+#successAnimation.animated #successAnimationCheck {
+  -webkit-animation: 1s cubic-bezier(0.77, 0, 0.175, 1) 1.2s 1 both drawCheck,
+    0.3s linear 2.1s 1 both fadeOut;
+  animation: 1s cubic-bezier(0.77, 0, 0.175, 1) 1.2s 1 both drawCheck,
+    0.3s linear 2.1s 1 both fadeOut;
+}
+#successAnimation.animated #successAnimationResult {
+  -webkit-animation: 0.3s linear 2.1s both fadeIn;
+  animation: 0.3s linear 2.1s both fadeIn;
+}
+
+/* error Animation */
+
+.ui-error-circle {
+  stroke-dasharray: 260.75219025px, 260.75219025px;
+  stroke-dashoffset: 260.75219025px;
+  animation: ani-error-circle 1.2s linear;
+}
+.ui-error-line1 {
+  stroke-dasharray: 55px 55px;
+  stroke-dashoffset: 55px;
+  stroke-linecap: round;
+  animation: ani-error-line 0.15s 1.2s linear both;
+}
+.ui-error-line2 {
+  stroke-dasharray: 55px 55px;
+  stroke-dashoffset: 55px;
+  stroke-linecap: round;
+  animation: ani-error-line 0.2s 0.9s linear both;
+}
+@keyframes ani-error-line {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+@keyframes ani-error-circle {
+  0% {
+    stroke-dasharray: 0, 260.75219025px;
+    stroke-dashoffset: 0;
+  }
+  35% {
+    stroke-dasharray: 120px, 120px;
+    stroke-dashoffset: -120px;
+  }
+  70% {
+    stroke-dasharray: 0, 260.75219025px;
+    stroke-dashoffset: -260.75219025px;
+  }
+  100% {
+    stroke-dasharray: 260.75219025px, 0;
+    stroke-dashoffset: -260.75219025px;
+  }
+}
