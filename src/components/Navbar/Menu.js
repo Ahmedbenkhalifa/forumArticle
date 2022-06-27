@@ -22,12 +22,15 @@ const Menu = ({ ...rest }) => {
       {!isLoading &&
         (isAuth ? (
           <>
+            <Button color="inherit" onClick={() => navigate("/")}>
+              Accueil
+            </Button>
             {role === "ADMIN" && (
               <Button color="inherit" onClick={() => navigate("/dashboard")}>
                 Dashboard
               </Button>
             )}
-            <Button color="inherit" onClick={() => navigate("/Profile")}>
+            <Button color="inherit" onClick={() => navigate("/profile")}>
               Profil
             </Button>
             <Button color="inherit" onClick={signOut}>

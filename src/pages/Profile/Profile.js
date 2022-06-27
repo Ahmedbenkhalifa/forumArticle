@@ -15,7 +15,6 @@ import { useSelector } from "react-redux";
 import { useTheme } from "@emotion/react";
 import EditInput from "../../components/EditInput";
 import avatar from "../../assets/images/avatar.png";
-import Navbar from "../../components/Navbar";
 
 const Profile = () => {
   const theme = useTheme();
@@ -26,7 +25,7 @@ const Profile = () => {
     setDisabled(!disabled);
   };
   return (
-    <Container maxWidth="lg" component={Paper} sx={{ background: "#EEE", mt: 9, p: 2 }}>
+    <Container maxWidth="sm" component={Paper} sx={{ background: "#EEE", mt: 10, p: 2 }}>
       <Divider sx={{ mb: 2 }} />
       <Typography variant="h5" sx={{ fontWeight: "500" }}>
         Mon Profil
@@ -37,8 +36,9 @@ const Profile = () => {
       <Box
         sx={{
           display: "flex",
-          alignItems: !matches ? "center" : "flex-start",
+          alignItems: !matches ? "flex-end" : "flex-start",
           my: 2,
+          justifyContent: "space-between",
           flexDirection: matches ? "column" : "",
         }}
       >
@@ -47,18 +47,16 @@ const Profile = () => {
           src={avatar}
           style={{
             borderRadius: "50%",
-            width: matches ? "136px" : "176px",
-            height: matches ? "136px" : "176px",
+            width: matches ? "136px" : "146px",
+            height: matches ? "136px" : "146px",
             boxShadow:
               "0px 6px 6px -3px rgb(0 0 0 / 20%), 0px 10px 14px 1px rgb(0 0 0 / 14%), 0px 4px 18px 3px rgb(0 0 0 / 12%)",
           }}
         />
-        <Box sx={{ display: "flex", flexDirection: "column", mt: 2, ml: matches ? 0 : 5 }}>
-          <Button variant="outlined" color="primary" sx={{ mb: 1 }} onClick={handleClick}>
-            <UpdateIcon sx={{ mr: 1 }} />
-            Modifier
-          </Button>
-        </Box>
+        <Button variant="outlined" color="primary" sx={{ mt: 2, mb: 1,width:'120px' }} onClick={handleClick}>
+          <UpdateIcon sx={{ mr: 1 }} />
+          Modifier
+        </Button>
       </Box>
       <Divider sx={{ mb: 2 }} />
       <Box sx={{ width: matches ? "100%" : "500px" }}>

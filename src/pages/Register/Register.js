@@ -41,7 +41,7 @@ const Register = () => {
     },
     validationSchema: registerValidation,
     onSubmit: (values) => {
-      console.log(values)
+      console.log(values);
       dispatch(
         signUp({
           firstName: values.firstName,
@@ -66,6 +66,7 @@ const Register = () => {
       component="main"
       maxWidth="xs"
       sx={{
+        pt: 4,
         margin: theme.spacing(8, "auto"),
         display: "flex",
         flexDirection: "column",
@@ -124,7 +125,7 @@ const Register = () => {
               color="primary"
             />
           </Grid>
-          <Grid item xs={12} sm={6}>
+          <Grid item xs={12}>
             <TextField
               error={Boolean(formik.touched.contry && formik.errors.contry)}
               onBlur={formik.handleBlur}
@@ -132,7 +133,7 @@ const Register = () => {
               value={formik.values.contry}
               helperText={formik.touched.contry && formik.errors.contry}
               variant="filled"
-              margin="normal"
+              // margin="normal"
               fullWidth
               id="contry"
               label="Pays"
@@ -149,7 +150,7 @@ const Register = () => {
               value={formik.values.email}
               helperText={formik.touched.email && formik.errors.email}
               variant="filled"
-              margin="normal"
+              // margin="normal"
               required
               fullWidth
               id="email"
@@ -167,7 +168,7 @@ const Register = () => {
               value={formik.values.password}
               helperText={formik.touched.password && formik.errors.password}
               variant="filled"
-              margin="normal"
+              // margin="normal"
               required
               fullWidth
               name="password"
@@ -186,7 +187,7 @@ const Register = () => {
               value={formik.values.confirmPassword}
               helperText={formik.touched.confirmPassword && formik.errors.confirmPassword}
               variant="filled"
-              margin="normal"
+              // margin="normal"
               required
               fullWidth
               name="confirmPassword"
@@ -221,7 +222,7 @@ const Register = () => {
           fullWidth
           variant="contained"
           color="primary"
-          sx={{ margin: theme.spacing(2, 0, 2, 0) ,color:'white'}}
+          sx={{ margin: theme.spacing(2, 0, 2, 0), color: "white" }}
         >
           {isLoading ? <CircularProgress size={24} sx={{ color: "white" }} /> : "S'inscrire"}
         </Button>
@@ -236,7 +237,7 @@ const Register = () => {
       {error && (
         <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
           <Alert onClose={handleClose} severity="error" sx={{ width: "100%" }}>
-           e-mail déja existe
+            e-mail déja existe
           </Alert>
         </Snackbar>
       )}

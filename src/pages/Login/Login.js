@@ -59,7 +59,7 @@ const SignIn = () => {
     return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
   });
   return (
-    <Box sx={{ pt: 10, width: "100%", height: "100vh", backgroundColor: "#EEE" }}>
+    <Box sx={{ pt: 10, width: "100%", height: "100vh" }}>
       <Container
         component="main"
         maxWidth="xs"

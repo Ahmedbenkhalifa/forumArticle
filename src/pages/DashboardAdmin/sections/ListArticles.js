@@ -8,6 +8,8 @@ import {
   Pagination,
   Paper,
   Typography,
+  useMediaQuery,
+  useTheme,
 } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import { useNavigate, useSearchParams } from "react-router-dom";
@@ -15,6 +17,8 @@ import moment from "moment";
 import useArticle from "../../../hooks/useArticle";
 import useSearch from "../../../hooks/useSearch";
 const ListArticles = () => {
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   const navigate = useNavigate();
   const [searchParams, setSearchParams] = useSearchParams();
   const searchTerm = searchParams.get("page");
@@ -23,7 +27,7 @@ const ListArticles = () => {
   const [query, setQuery] = useState(searchTermQuery);
   const [articles, isLoading, totalPages] = useArticle(page);
   const [articlesSearch, isLoadingSearch, totalPagesSearch] = useSearch(page, query);
-  
+
   const handleChange = (event, value) => {
     setPage(value);
     query ? setSearchParams({ page: value, query: query }) : setSearchParams({ page: value });
@@ -58,14 +62,20 @@ const ListArticles = () => {
         flexDirection: "column",
       }}
     >
-      <Box sx={{ display: "flex", alignItems: "center", position: "fixed" }}>
+      <Box
+        sx={{
+          display: "flex",
+          alignItems:  "center",
+          flexDirection: isMobile ? "column" : "row",
+        }}
+      >
         <Typography variant="h4" sx={{ mr: 4 }}>
           Liste des Publications
         </Typography>
         <Paper
           elevation={10}
           component="form"
-          sx={{ width: "500px", borderRadius: "15px", display: "flex", overflow: "hidden" }}
+          sx={{ maxWidth: "500px", borderRadius: "15px", display: "flex", overflow: "hidden" }}
         >
           <InputBase
             sx={{ ml: 2, flex: 1 }}
@@ -83,7 +93,6 @@ const ListArticles = () => {
           </Button>
         </Paper>
       </Box>
-      <Box sx={{ mt: 6 }}></Box>
       {isLoading && (
         <Box sx={{ margin: "30px auto", width: "80px", height: "80px" }}>
           <CircularProgress color="secondary" />
@@ -99,7 +108,7 @@ const ListArticles = () => {
                 <Typography
                   variant="h6"
                   component={Box}
-                  onClick={()=> navigate(`/article?id=${post._id}`)}
+                  onClick={() => navigate(`/article?id=${post._id}`)}
                   sx={{
                     cursor: "pointer",
                     "&:hover": {

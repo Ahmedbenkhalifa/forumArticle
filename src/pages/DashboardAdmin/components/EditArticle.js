@@ -16,6 +16,7 @@ import axios from "axios";
 import TagsInput from "./TagsInput";
 import EditorHtml from "./EditorHtml";
 import MuiAlert from "@mui/material/Alert";
+import AttachFileIcon from "@mui/icons-material/AttachFile";
 
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
@@ -81,7 +82,7 @@ const EditForm = ({ article }) => {
   };
   const addFileToPost = async (id, fileUpload) => {
     try {
-       await axios.put(
+      await axios.put(
         `/api/article/uploadFile/${id}`,
         { file: fileUpload },
         {
@@ -109,7 +110,7 @@ const EditForm = ({ article }) => {
       if (file && !disabled) {
         await addFileToPost(id, file);
       }
-      handleOpen()
+      handleOpen();
     },
   });
   return (
@@ -233,19 +234,20 @@ const EditForm = ({ article }) => {
           }
           label="Active"
         />
-        <Box sx={{ display: "flex", alignItems: "center" }}>
+        <Box sx={{ display: "flex", alignItems: "flex-start", flexDirection: "column" }}>
           {article?.file && (
             <Button
               variant="outlined"
               component={"a"}
               href={`http://localhost:8080/api/article/downloadPost/${article._id}`}
               download
+              startIcon={<AttachFileIcon />}
             >
-              telecharger le fichier joint
+              telecharger fichier
             </Button>
           )}
           <Button variant="outlined" color="success" onClick={handleChangeFile}>
-            Modifier le fichier
+            Modifier fichier
           </Button>
           {!disabled && (
             <Input
@@ -257,13 +259,7 @@ const EditForm = ({ article }) => {
             />
           )}
         </Box>
-        <Button
-          type="submit"
-          variant="outlined"
-          color="primary"
-          sx={{ my: 2 }}
-          // startIcon={<SendIcon />}
-        >
+        <Button type="submit" variant="outlined" color="primary" sx={{ my: 2 }}>
           Enregistrer la modification
         </Button>
       </form>
@@ -276,13 +272,12 @@ const EditForm = ({ article }) => {
   );
 };
 const Input = styled("input")(({ theme }) => ({
-  margin: "0px auto 0",
-  display: "inline-block",
+  marginTop: "10px",
   fontSize: "15px",
   background: "white",
   borderRadius: "50px",
   boxShadow: "5px 5px 10px black",
-  width: "310px",
+  width: "270px",
   outline: "none",
   "&::-webkit-file-upload-button": {
     color: "white",

@@ -230,11 +230,11 @@ const AddArticle = () => {
 const Input = styled("input")(({ theme }) => ({
   margin: "5px auto 0",
   display: "inline-block",
-  fontSize: "16px",
+  fontSize: "15px",
   background: "white",
   borderRadius: "50px",
   boxShadow: "5px 5px 10px black",
-  width: "320px",
+  width: "270px",
   outline: "none",
   "&::-webkit-file-upload-button": {
     color: "white",

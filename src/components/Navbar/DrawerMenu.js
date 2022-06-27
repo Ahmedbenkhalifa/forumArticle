@@ -4,8 +4,24 @@ import Drawer from "@mui/material/Drawer";
 import List from "@mui/material/List";
 import Divider from "@mui/material/Divider";
 import ListItem from "@mui/material/ListItem";
+import { Button, styled } from "@mui/material";
+import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { signOut as signOutUser } from "../../actions/authActions";
+import ModalContact from "../ModalContact";
 
 export default function DrawerMenu({ isOpen, handleClose }) {
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const closeModal = () => setOpen(false);
+  const { isAuth, isLoading } = useSelector((state) => state.userReducer);
+  const role = useSelector((state) => state.userReducer.user?.role);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const signOut = () => {
+    dispatch(signOutUser());
+    navigate("/");
+  };
   const list = (anchor) => (
     <Box
       sx={{
@@ -14,35 +30,78 @@ export default function DrawerMenu({ isOpen, handleClose }) {
       }}
       role="presentation"
     >
-      <List sx={{ mt: 8 }}>
-        {["Accueil", "Présentation", "Produits", "Témoignages", "Contact"].map((text, index) => (
-          <div key={index}>
-            <ListItem
-              onClick={handleClose}
-              sx={{
-                py: 2,
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                fontSize: "20px",
+      {!isLoading &&
+        (isAuth ? (
+          <List sx={{ mt: 8 }}>
+            {role === "ADMIN" && (
+              <ItemList
+                onClick={() => {
+                  handleClose();
+                  navigate("/dashboard");
+                }}
+                button
+              >
+                Dashboard
+              </ItemList>
+            )}
+            <Divider variant="middle" sx={{ width: "50%", margin: "0 auto" }} />
+            <ItemList
+              onClick={() => {
+                handleClose();
+                navigate("/profile");
               }}
               button
-              key={text}
             >
-              {text}
-            </ListItem>
+              Profil
+            </ItemList>
             <Divider variant="middle" sx={{ width: "50%", margin: "0 auto" }} />
-          </div>
+            <ItemList
+              onClick={() => {
+                handleClose();
+                signOut();
+              }}
+              button
+            >
+              Logout
+            </ItemList>
+            <Divider variant="middle" sx={{ width: "50%", margin: "0 auto" }} />
+          </List>
+        ) : (
+          <List sx={{ mt: 8 }}>
+            <ItemList
+              onClick={() => {
+                handleClose();
+                navigate("/login");
+              }}
+              button
+            >
+              Login
+            </ItemList>
+            <Divider variant="middle" sx={{ width: "50%", margin: "0 auto" }} />
+            <ItemList
+              onClick={() => {
+                handleClose();
+                navigate("/register");
+              }}
+              button
+            >
+              Sign up
+            </ItemList>
+            <Divider variant="middle" sx={{ width: "50%", margin: "0 auto" }} />
+          </List>
         ))}
-        <Box
-          sx={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            fontSize: "20px",
-          }}
-        ></Box>
-      </List>
+      <Button
+        sx={{
+          display: "block",
+          margin: "0 auto",
+          fontSize: "20px",
+        }}
+        variant="contained"
+        onClick={handleOpen}
+      >
+        Contact
+      </Button>
+      <ModalContact open={open} handleClose={closeModal} />
     </Box>
   );
 
@@ -52,3 +111,11 @@ export default function DrawerMenu({ isOpen, handleClose }) {
     </Drawer>
   );
 }
+
+const ItemList = styled(ListItem)(() => ({
+  py: 2,
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
+  fontSize: "20px",
+}));

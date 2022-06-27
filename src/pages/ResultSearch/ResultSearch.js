@@ -7,6 +7,8 @@ import {
   Pagination,
   Paper,
   Typography,
+  useMediaQuery,
+  useTheme,
 } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import { useNavigate, useSearchParams } from "react-router-dom";
@@ -14,6 +16,8 @@ import moment from "moment";
 import useSearch from "../../hooks/useSearch";
 
 const ResultSearch = () => {
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   const navigate = useNavigate();
   const handleClick = (id) => {
     navigate(`/article?id=${id}`);
@@ -48,13 +52,15 @@ const ResultSearch = () => {
   return (
     <Box
       sx={{
-        mt: 8,
+        mt: 9,
         p: 2,
         display: "flex",
         flexDirection: "column",
       }}
     >
-      <Box sx={{ display: "flex", alignItems: "center", position: "fixed" }}>
+      <Box
+        sx={{ display: "flex",  flexDirection: isMobile ? "column" : "row" }}
+      >
         <Typography variant="h4" sx={{ mr: 4 }}>
           Liste des Publications
         </Typography>
@@ -62,7 +68,7 @@ const ResultSearch = () => {
           elevation={10}
           component="form"
           onSubmit={doSearch}
-          sx={{ width: "500px", borderRadius: "15px", display: "flex", overflow: "hidden" }}
+          sx={{ maxWidth: "500px", borderRadius: "15px", display: "flex", overflow: "hidden" }}
         >
           <InputBase
             sx={{ ml: 2, flex: 1 }}
@@ -80,7 +86,6 @@ const ResultSearch = () => {
           </Button>
         </Paper>
       </Box>
-      <Box sx={{ mt: 6 }}></Box>
       {isLoading && (
         <Box sx={{ margin: "30px auto", width: "80px", height: "80px" }}>
           <CircularProgress color="secondary" />
@@ -113,25 +118,29 @@ const ResultSearch = () => {
       {!isLoading && articles.length > 0 && (
         <Pagination count={totalPages} page={parseInt(page)} onChange={handleChange} />
       )}
-      {!isLoading && articles.length === 0 && (
-        <EmptyArray/>
-      )}
+      {!isLoading && articles.length === 0 && <EmptyArray />}
     </Box>
   );
 };
 
 const EmptyArray = () => {
   return (
-    <Box sx={{mt:5}}>
+    <Box sx={{ mt: 5 }}>
       <Typography variant="body1">
         Aucun document ne correspond aux termes de recherche spécifiés
         <br />
         Suggestions :
       </Typography>
       <Box component={"ul"}>
-        <Typography component="li" variant="body1" >Vérifiez l’orthographe des termes de recherche.</Typography>
-        <Typography component="li" variant="body1" >Essayez d'autres mots.</Typography>
-        <Typography component="li" variant="body1" >Spécifiez un moins grand nombre de mots.</Typography>
+        <Typography component="li" variant="body1">
+          Vérifiez l’orthographe des termes de recherche.
+        </Typography>
+        <Typography component="li" variant="body1">
+          Essayez d'autres mots.
+        </Typography>
+        <Typography component="li" variant="body1">
+          Spécifiez un moins grand nombre de mots.
+        </Typography>
       </Box>
     </Box>
   );

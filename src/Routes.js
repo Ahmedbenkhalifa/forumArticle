@@ -1,7 +1,7 @@
 import React from "react";
 import { Routes as RoutesRouter, Route, useLocation } from "react-router-dom";
 import Navbar from "./components/Navbar";
-import {PrivateRoute,PrivateRouteAdmin} from "./components/PrivateRoute";
+import { PrivateRoute, PrivateRouteAdmin } from "./components/PrivateRoute";
 import Article from "./pages/Article/Article";
 import DashboardAdmin from "./pages/DashboardAdmin";
 import Forgotpassword from "./pages/Forgotpassword";

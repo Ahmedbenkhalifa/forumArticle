@@ -20,6 +20,7 @@ import { useTheme } from "@mui/system";
 import { useNavigate } from "react-router-dom";
 import Menu from "./Navbar/Menu";
 import HamburgerMenu from "./Navbar/HamburgerMenu";
+import AddBoxIcon from '@mui/icons-material/AddBox';
 
 const drawerWidth = 240;
 const SideBar = ({ isAdmin, children }) => {
@@ -32,7 +33,7 @@ const SideBar = ({ isAdmin, children }) => {
 
   return (
     <Box sx={{ display: "flex" }}>
-      <AppBar position="absolute" sx={{background:'#FFE69A'}} open={open && !matches}>
+      <AppBar position="absolute" sx={{ background: "#FFE69A" }} open={open && !matches}>
         <Toolbar
           sx={{
             pr: "24px",
@@ -93,7 +94,6 @@ const SideBar = ({ isAdmin, children }) => {
       <Box
         component="main"
         sx={{
-          // backgroundColor: "#EEEEEE",
           flexGrow: 1,
           height: "100vh",
           overflow: "auto",
@@ -114,21 +114,21 @@ const ListDrawer = () => {
     <List component="nav">
       <ListItemButton onClick={() => navigate("")}>
         <ListItemIcon>
-          <DashboardIcon />
+          <AddBoxIcon />
         </ListItemIcon>
         <ListItemText primary="Ajouter un Article" />
       </ListItemButton>
-      <Divider sx={{my:1}}/>
+      <Divider sx={{ my: 1 }} />
       <ListItemButton onClick={() => navigate("listAllArticle")}>
         <ListItemIcon>
           <DashboardIcon />
         </ListItemIcon>
         <ListItemText primary="List des Articles" />
       </ListItemButton>
-      <Divider sx={{my:1}}/>
+      <Divider sx={{ my: 1 }} />
       <ListItemButton onClick={() => navigate("users")}>
         <ListItemIcon>
-          <DashboardIcon />
+           <PeopleIcon />
         </ListItemIcon>
         <ListItemText primary="List des utilisateurs" />
       </ListItemButton>

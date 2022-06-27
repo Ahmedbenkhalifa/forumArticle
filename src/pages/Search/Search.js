@@ -32,7 +32,7 @@ const Search = () => {
     e.preventDefault();
     if (queryText) {
       console.log(queryText);
-      navigate(`/search?query=${queryText}`);
+      navigate(`/search?query=${queryText}&page=1`);
     }
   };
   useEffect(() => {
@@ -68,7 +68,7 @@ const Search = () => {
           alignItems: "center",
         }}
       >
-        <Typography variant="h4" sx={{ fontWeight: "500", mb: 1 }}>
+        <Typography variant="h4" textAlign="center" sx={{ fontWeight: "500", mb: 1 }}>
           Hi! How can we help you?
         </Typography>
         <Paper
